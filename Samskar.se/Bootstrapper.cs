@@ -5,10 +5,13 @@ using Nancy.TinyIoc;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Reflection;
+using Nancy.Bootstrappers.StructureMap;
+using StructureMap;
 
 namespace Samskar
 {
-    public class Bootstrapper : DefaultNancyBootstrapper
+    public class Bootstrapper : StructureMapNancyBootstrapper
     {
         protected override void ConfigureConventions(NancyConventions nancyConventions)
         {
@@ -17,16 +20,23 @@ namespace Samskar
             nancyConventions.StaticContentsConventions.Add(StaticContentConventionBuilder.AddDirectory(@"/", @"/Content"));
         }
 
-        protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
+        protected override void ApplicationStartup(IContainer container, IPipelines pipelines)
         {
             base.ApplicationStartup(container, pipelines);
+
+            container.Configure(x =>
+            {
+                x.Scan(y => y.Assembly(Assembly.GetCallingAssembly()));
+                x.For<IImagesService>().Use<ImagesService>();
+            });
 
             //pipelines.BeforeRequest.AddItemToStartOfPipeline(CheckAuthorization);
         }
 
         private Response CheckAuthorization(NancyContext context)
         {
-            if(context.Request.Method.Equals("GET", StringComparison.OrdinalIgnoreCase) || context.Request.Path == "/login")
+            if (context.Request.Method.Equals("GET", StringComparison.OrdinalIgnoreCase) ||
+                context.Request.Path == "/login")
                 return null;
 
             try
@@ -39,7 +49,7 @@ namespace Samskar
             }
             catch (Exception)
             {
-                return new Response { StatusCode = HttpStatusCode.Unauthorized };
+                return new Response {StatusCode = HttpStatusCode.Unauthorized};
             }
         }
     }

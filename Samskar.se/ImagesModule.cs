@@ -5,19 +5,18 @@ namespace Samskar
 {
     public class ImagesModule : NancyModule
     {
-        public ImagesModule() : base("/images")
+        private readonly IImagesService _imagesService;
+
+        public ImagesModule(IImagesService imagesService) : base("/images")
         {
+            _imagesService = imagesService;
+
             Get["/"] = _ => GetAllImages();
         }
 
         private IEnumerable<Image> GetAllImages()
         {
-            return new List<Image>
-            {
-                new Image {Url = "http://images.samskar.se/1.jpg"},
-                new Image {Url = "http://images.samskar.se/2.jpg"},
-                new Image {Url = "http://images.samskar.se/3.jpg"}
-            };
+            return _imagesService.GetAllImages();
         }
     }
 

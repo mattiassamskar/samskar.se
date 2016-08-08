@@ -29,8 +29,8 @@ namespace Samskar
                 cfg.Scan(scanner =>
                 {
                     scanner.TheCallingAssembly();
-                    scanner.AddAllTypesOf(typeof(IRequestHandler<,>));
-                    scanner.AddAllTypesOf(typeof(INotificationHandler<>));
+                    scanner.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<,>));
+                    scanner.ConnectImplementationsToTypesClosing(typeof(INotificationHandler<>));
                 });
                 cfg.For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
                 cfg.For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));

@@ -1,6 +1,6 @@
 ﻿using Nancy;
 
-namespace Samskar
+namespace Samskar.Api
 {
     public class ContentModule : NancyModule
     {

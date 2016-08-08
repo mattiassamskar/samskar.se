@@ -1,11 +1,12 @@
-﻿using Nancy;
-using Nancy.ModelBinding;
-using Nancy.Responses;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using Nancy;
+using Nancy.ModelBinding;
+using Nancy.Responses;
+using Samskar.Models;
 
-namespace Samskar
+namespace Samskar.Api
 {
     public class LoginModule : NancyModule
     {
@@ -37,11 +38,5 @@ namespace Samskar
 
             return new { Token = JWT.JsonWebToken.Encode(payload, key, JWT.JwtHashAlgorithm.HS256) };
         }
-    }
-
-    internal class User
-    {
-        public string UserName { get; set; }
-        public string Password { get; set; }
     }
 }

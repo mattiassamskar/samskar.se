@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using Nancy;
+using Samskar.Models;
+using Samskar.Services;
 
-namespace Samskar
+namespace Samskar.Api
 {
     public class ImagesModule : NancyModule
     {
@@ -18,10 +20,5 @@ namespace Samskar
         {
             return _imagesService.GetAllImages();
         }
-    }
-
-    public class Image
-    {
-        public string Url { get; set; }
     }
 }

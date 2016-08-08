@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Samskar.Models;
 
-namespace Samskar
+namespace Samskar.Services
 {
     public class ImagesService : IImagesService
     {

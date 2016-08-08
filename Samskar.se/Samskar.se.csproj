@@ -80,16 +80,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IImagesService.cs" />
-    <Compile Include="ImagesModule.cs" />
-    <Compile Include="ImagesService.cs" />
-    <Compile Include="LoginModule.cs" />
+    <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Services\IImagesService.cs" />
+    <Compile Include="Api\ImagesModule.cs" />
+    <Compile Include="Services\ImagesService.cs" />
+    <Compile Include="Api\LoginModule.cs" />
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="ContentModule.cs" />
+    <Compile Include="Api\ContentModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

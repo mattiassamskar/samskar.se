@@ -1,12 +1,12 @@
 ﻿using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Conventions;
-using Nancy.TinyIoc;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Reflection;
 using Nancy.Bootstrappers.StructureMap;
+using Samskar.Services;
 using StructureMap;
 
 namespace Samskar

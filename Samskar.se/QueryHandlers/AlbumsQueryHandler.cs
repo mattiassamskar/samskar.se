@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using MediatR;
-using Samskar.Requests;
+using Samskar.Queries;
 
-namespace Samskar.Handlers
+namespace Samskar.QueryHandlers
 {
-    public class AlbumsHandler : IRequestHandler<AlbumsRequest, IEnumerable<string>>, IRequestHandler<AlbumRequest, IEnumerable<string>>
+    public class AlbumsQueryHandler : IRequestHandler<AlbumsQuery, IEnumerable<string>>, IRequestHandler<AlbumQuery, IEnumerable<string>>
     {
-        public IEnumerable<string> Handle(AlbumsRequest message)
+        public IEnumerable<string> Handle(AlbumsQuery message)
         {
             return new List<string>
             {
@@ -16,7 +16,7 @@ namespace Samskar.Handlers
             };
         }
 
-        public IEnumerable<string> Handle(AlbumRequest message)
+        public IEnumerable<string> Handle(AlbumQuery message)
         {
             return new List<string>
             {

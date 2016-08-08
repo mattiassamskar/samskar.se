@@ -84,12 +84,15 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Requests\AlbumRequest.cs" />
+    <Compile Include="Notifications\AlbumCreatedNotification.cs" />
+    <Compile Include="Commands\CreateAlbumCommand.cs" />
+    <Compile Include="Queries\AlbumQuery.cs" />
     <Compile Include="Api\AlbumsModule.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Requests\AlbumsRequest.cs" />
-    <Compile Include="Handlers\AlbumsHandler.cs" />
+    <Compile Include="Queries\AlbumsQuery.cs" />
+    <Compile Include="CommandHandlers\AlbumsCommandHandler.cs" />
+    <Compile Include="QueryHandlers\AlbumsQueryHandler.cs" />
     <Compile Include="Api\LoginModule.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Api\ContentModule.cs" />

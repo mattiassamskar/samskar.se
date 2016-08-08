@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using MediatR;
 
-namespace Samskar.Requests
+namespace Samskar.Queries
 {
-    public class AlbumRequest : IRequest<IEnumerable<string>>
+    public class AlbumQuery : IRequest<IEnumerable<string>>
     {
         public string Name { get; set; }
     }

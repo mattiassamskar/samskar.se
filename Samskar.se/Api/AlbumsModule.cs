@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using MediatR;
 using Nancy;
-using Samskar.Requests;
+using Samskar.Queries;
 
 namespace Samskar.Api
 {
@@ -19,12 +19,12 @@ namespace Samskar.Api
 
         private IEnumerable<string> GetAlbums()
         {
-            return _mediator.Send(new AlbumsRequest());
+            return _mediator.Send(new AlbumsQuery());
         }
 
         private IEnumerable<string> GetAlbum(string name)
         {
-            return _mediator.Send(new AlbumRequest { Name = name });
+            return _mediator.Send(new AlbumQuery { Name = name });
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using MediatR;
 using Nancy;
+using Nancy.ModelBinding;
+using Samskar.Commands;
 using Samskar.Queries;
 
 namespace Samskar.Api
@@ -15,6 +17,12 @@ namespace Samskar.Api
 
             Get["/"] = _ => GetAlbums();
             Get["/{name}"] = _ => GetAlbum(_.name);
+            Post["/"] = _ => CreateAlbum(this.Bind<CreateAlbumCommand>());
+        }
+
+        private dynamic CreateAlbum(CreateAlbumCommand createAlbumCommand)
+        {
+            return _mediator.Send(createAlbumCommand);
         }
 
         private IEnumerable<string> GetAlbums()

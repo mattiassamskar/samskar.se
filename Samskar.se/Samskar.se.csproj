@@ -86,9 +86,9 @@
   <ItemGroup>
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Services\IImagesService.cs" />
+    <Compile Include="Requests\AllImagesRequest.cs" />
     <Compile Include="Api\ImagesModule.cs" />
-    <Compile Include="Services\ImagesService.cs" />
+    <Compile Include="Handlers\ImagesHandler.cs" />
     <Compile Include="Api\LoginModule.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Api\ContentModule.cs" />

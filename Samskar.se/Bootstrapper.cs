@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using MediatR;
 using Nancy.Bootstrappers.StructureMap;
-using Samskar.Services;
 using StructureMap;
 using StructureMap.Graph;
 
@@ -36,7 +35,6 @@ namespace Samskar
                 cfg.For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
                 cfg.For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
                 cfg.For<IMediator>().Use<Mediator>();
-                cfg.For<IImagesService>().Use<ImagesService>();
             });
 
             //pipelines.BeforeRequest.AddItemToStartOfPipeline(CheckAuthorization);

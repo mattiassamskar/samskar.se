@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
+using MediatR;
 using Samskar.Models;
+using Samskar.Requests;
 
-namespace Samskar.Services
+namespace Samskar.Handlers
 {
-    public class ImagesService : IImagesService
+    public class ImagesHandler : IRequestHandler<AllImagesRequest, IEnumerable<Image>>
     {
-        public IEnumerable<Image> GetAllImages()
+        public IEnumerable<Image> Handle(AllImagesRequest message)
         {
             return new List<Image>
             {

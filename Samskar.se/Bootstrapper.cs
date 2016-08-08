@@ -4,10 +4,11 @@ using Nancy.Conventions;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Reflection;
+using MediatR;
 using Nancy.Bootstrappers.StructureMap;
 using Samskar.Services;
 using StructureMap;
+using StructureMap.Graph;
 
 namespace Samskar
 {
@@ -24,10 +25,18 @@ namespace Samskar
         {
             base.ApplicationStartup(container, pipelines);
 
-            container.Configure(x =>
+            container.Configure(cfg =>
             {
-                x.Scan(y => y.Assembly(Assembly.GetCallingAssembly()));
-                x.For<IImagesService>().Use<ImagesService>();
+                cfg.Scan(scanner =>
+                {
+                    scanner.TheCallingAssembly();
+                    scanner.AddAllTypesOf(typeof(IRequestHandler<,>));
+                    scanner.AddAllTypesOf(typeof(INotificationHandler<>));
+                });
+                cfg.For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t));
+                cfg.For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t));
+                cfg.For<IMediator>().Use<Mediator>();
+                cfg.For<IImagesService>().Use<ImagesService>();
             });
 
             //pipelines.BeforeRequest.AddItemToStartOfPipeline(CheckAuthorization);

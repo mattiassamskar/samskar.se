@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "webpack-dev-server --content-base build --progress --colors"
+    "watch": "webpack-dev-server --content-base src --progress --colors"
   },
   "author": "",
   "license": "ISC",

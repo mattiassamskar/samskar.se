@@ -1,7 +1,8 @@
 require('./style.css');
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, Link, browserHistory } from 'react-router'
+import { Router, Route, Link, browserHistory } from 'react-router';
+import * as albumService from './albumService';
 
 class Album extends React.Component {
   constructor() {
@@ -15,11 +16,9 @@ class Album extends React.Component {
     </div>);
   }
   componentDidMount() {
-    this.setState({images: [
-      "https://samskar.blob.core.windows.net/images/1508%20Sicilien/001.jpg",
-      "https://samskar.blob.core.windows.net/images/1508%20Sicilien/002.jpg",
-      "https://samskar.blob.core.windows.net/images/1508%20Sicilien/003.jpg"
-    ]});
+    albumService.getAlbumImages(this.props.params.albumName).then((result) => {
+      this.setState({images: result.data});
+    });
   }
 }
 
@@ -43,13 +42,11 @@ class App extends React.Component {
     this.state = {albums: []};
   }
   componentDidMount() {
-    this.setState({albums: [
-      "1607 Norrland",
-      "1607 Kreta",
-      "1512 Julafton",
-      "1401 Fjällen",
-      "1301 Barnen fyller år"
-    ]});
+    albumService.getAlbums().then((result) => {
+      let albums = Array.from(result.data);
+      albums.reverse();
+      this.setState({albums: albums});
+    });
   }
   render() {
     return (

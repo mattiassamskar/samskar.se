@@ -4,6 +4,12 @@ module.exports = {
     path: "./build",
     filename: "index.js"
   },
+  devServer: {
+    proxy: {
+      "/albums": "http://localhost:7820",
+      "/albums/*": "http://localhost:7820"
+    }
+  },
   module: {
     loaders: [
       { test: /\.css$/, loader: "style!css" },

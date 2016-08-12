@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using MediatR;
+using Microsoft.WindowsAzure.Storage.Blob;
 using Samskar.Queries;
 
 namespace Samskar.QueryHandlers
@@ -8,22 +11,23 @@ namespace Samskar.QueryHandlers
     {
         public IEnumerable<string> Handle(AlbumsQuery message)
         {
-            return new List<string>
-            {
-                "12 Summer",
-                "1612 Christmas",
-                "1401 Skiing in Italy"
-            };
+            return GetContainer()
+                .ListBlobs()
+                .OfType<CloudBlobDirectory>()
+                .Select(dir => dir.Prefix.TrimEnd('/'));
         }
 
         public IEnumerable<string> Handle(AlbumQuery message)
         {
-            return new List<string>
-            {
-                "http://images.samskar.se/1.jpg",
-                "http://images.samskar.se/2.jpg",
-                "http://images.samskar.se/3.jpg"
-            };
+            return GetContainer()
+                .GetDirectoryReference(message.Name)
+                .ListBlobs()
+                .Select(x => x.Uri.AbsoluteUri);
+        }
+
+        private CloudBlobContainer GetContainer()
+        {
+            return new CloudBlobContainer(new Uri(@"https://samskar.blob.core.windows.net/images"));
         }
     }
 }

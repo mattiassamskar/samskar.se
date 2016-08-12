@@ -12,7 +12,7 @@ class Album extends React.Component {
   render() {
     return(
     <div>
-      {this.state.images.map(image => <ImageItem imageUrl={image} />)}
+      {this.state.images.map(image => <ImageItem imageUrl={image} key={image} />)}
     </div>);
   }
   componentDidMount() {
@@ -52,7 +52,7 @@ class App extends React.Component {
     return (
       <div className="main">
         <div className="title">Familjen Sämskar</div>
-        {this.state.albums.map(album => <AlbumItem albumName={album} />)}
+        {this.state.albums.map(album => <AlbumItem albumName={album} key={album} />)}
       </div>);
   }
 }

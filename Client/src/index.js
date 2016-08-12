@@ -91,7 +91,7 @@
 	        'div',
 	        null,
 	        this.state.images.map(function (image) {
-	          return _react2.default.createElement(ImageItem, { imageUrl: image });
+	          return _react2.default.createElement(ImageItem, { imageUrl: image, key: image });
 	        })
 	      );
 	    }
@@ -164,7 +164,7 @@
 	          'Familjen Sämskar'
 	        ),
 	        this.state.albums.map(function (album) {
-	          return _react2.default.createElement(AlbumItem, { albumName: album });
+	          return _react2.default.createElement(AlbumItem, { albumName: album, key: album });
 	        })
 	      );
 	    }
@@ -28602,7 +28602,7 @@
 
 
 	// module
-	exports.push([module.id, "body {\r\n    background-color: #000;\r\n    font-family: 'Press Start 2P', cursive;\r\n}\r\n\r\n.main {\r\n    margin-left: 20%;\r\n}\r\n\r\n.title {\r\n    color: #fff;\r\n    font-size: 42px;\r\n    margin-bottom: 90px;\r\n    margin-top: 50px;\r\n}\r\n\r\n.image {\r\n    max-width: 100%;\r\n    max-height: 100%;\r\n    display: block;\r\n    margin: 50px auto;\r\n}\r\n\r\n.albumItem {\r\n    font-size: 18px;\r\n    margin-bottom: 24px;\r\n}\r\n\r\na:link {\r\n    color: white;\r\n}\r\n\r\na:visited {\r\n    color: grey;\r\n}\r\n\r\na:hover {\r\n    color: darkgrey;\r\n}\r\n\r\na:active {\r\n    color: darkgrey;\r\n}\r\n\r\n@media only screen and (min-device-width:768px)and (max-device-width:1024px) {\r\n    .main{\r\n        margin-left: 2px;\r\n    }\r\n    .title {\r\n        font-size: 40px;\r\n        margin-bottom: 80px;\r\n    }\r\n    .album-link {\r\n        font-size: 18px;\r\n        margin-bottom: 30px;\r\n    }\r\n}\r\n\r\n@media only screen and (min-device-width:320px)and (max-device-width:667px) {\r\n    .main{\r\n        margin-left: 2px;\r\n    }\r\n    .title {\r\n        font-size: 20px;\r\n        margin-bottom: 50px;\r\n        margin-top: 30px;\r\n    }\r\n    .album-link {\r\n        font-size: 12px;\r\n        margin-bottom: 20px;\r\n    }\r\n}\r\n", ""]);
+	exports.push([module.id, "body {\r\n    background-color: #000;\r\n    font-family: 'Press Start 2P', cursive;\r\n}\r\n\r\n.main {\r\n    margin-left: 20%;\r\n}\r\n\r\n.title {\r\n    color: #fff;\r\n    font-size: 42px;\r\n    margin-bottom: 90px;\r\n    margin-top: 50px;\r\n}\r\n\r\n.image {\r\n    max-width: 100%;\r\n    max-height: 100%;\r\n    display: block;\r\n    margin: 50px auto;\r\n}\r\n\r\n.albumItem {\r\n    font-size: 18px;\r\n    margin-bottom: 24px;\r\n}\r\n\r\na:link {\r\n    color: white;\r\n}\r\n\r\na:visited {\r\n    color: grey;\r\n}\r\n\r\na:hover {\r\n    color: darkgrey;\r\n}\r\n\r\na:active {\r\n    color: darkgrey;\r\n}\r\n\r\n@media only screen and (min-device-width:768px)and (max-device-width:1024px) {\r\n    .main{\r\n        margin-left: 2px;\r\n    }\r\n    .title {\r\n        font-size: 40px;\r\n        margin-bottom: 80px;\r\n    }\r\n    .albumItem {\r\n        font-size: 18px;\r\n        margin-bottom: 30px;\r\n    }\r\n}\r\n\r\n@media only screen and (min-device-width:320px)and (max-device-width:667px) {\r\n    .main{\r\n        margin-left: 2px;\r\n    }\r\n    .title {\r\n        font-size: 20px;\r\n        margin-bottom: 50px;\r\n        margin-top: 30px;\r\n    }\r\n    .albumItem {\r\n        font-size: 12px;\r\n        margin-bottom: 20px;\r\n    }\r\n}\r\n", ""]);
 
 	// exports
 

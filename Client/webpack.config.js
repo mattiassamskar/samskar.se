@@ -6,8 +6,14 @@ module.exports = {
   },
   devServer: {
     proxy: {
-      "/albums": "http://localhost:7820",
-      "/albums/*": "http://localhost:7820"
+      "/albums": {
+        target: "http://www.samskar.se",
+        changeOrigin: true
+      },
+      "/albums/*": {
+        target: "http://www.samskar.se",
+        changeOrigin: true
+      }
     }
   },
   module: {

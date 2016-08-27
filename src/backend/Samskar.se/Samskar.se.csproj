@@ -110,11 +110,11 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\Client\src\index.html">
+    <Content Include="..\..\frontend\src\index.html">
       <Link>Content\index.html</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\Client\src\index.js">
+    <Content Include="..\..\frontend\src\index.js">
       <Link>Content\index.js</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -68,7 +68,7 @@
 
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRouter.Router,
-	  { history: _reactRouter.browserHistory },
+	  null,
 	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _AlbumList2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: 'albums/:albumName', component: _ImageList2.default })
 	), document.getElementById('content'));

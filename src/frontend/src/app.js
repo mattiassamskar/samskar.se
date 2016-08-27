@@ -6,7 +6,7 @@ import AlbumList from './AlbumList';
 import ImageList from './ImageList';
 
 render((
-  <Router history={browserHistory}>
+  <Router>
     <Route path="/" component={AlbumList} />
     <Route path="albums/:albumName" component={ImageList}/>
   </Router>

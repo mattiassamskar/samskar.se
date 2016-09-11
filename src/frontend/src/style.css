@@ -14,16 +14,18 @@ body {
     margin-top: 50px;
 }
 
-.image {
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
-    margin: 50px auto;
+.grid-sizer,
+.grid-item {
+  width: 33.333%;
 }
 
-.albumItem {
-    font-size: 18px;
-    margin-bottom: 24px;
+.grid-item img {
+  display: block;
+  max-width: 100%;
+}
+
+.gutter-sizer {
+  width: 0%;
 }
 
 a:link {
@@ -50,9 +52,9 @@ a:active {
         font-size: 40px;
         margin-bottom: 80px;
     }
-    .albumItem {
-        font-size: 18px;
-        margin-bottom: 30px;
+    .grid-sizer,
+    .grid-item { 
+        width: 50%; 
     }
 }
 
@@ -65,8 +67,8 @@ a:active {
         margin-bottom: 50px;
         margin-top: 30px;
     }
-    .albumItem {
-        font-size: 12px;
-        margin-bottom: 20px;
+    .grid-sizer,
+    .grid-item {
+        width: 50%;     
     }
 }

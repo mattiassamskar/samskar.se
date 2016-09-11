@@ -1,11 +1,11 @@
 import React from 'react';
 import { getAlbumImages } from './AlbumService';
-import  Gallery  from './Gallery'
+import Gallery  from './Gallery'
 
 class ImageList extends React.Component {
   constructor() {
     super();
-    this.state = {images: []};
+    this.state = { images: [] };
   }
   componentDidMount() {
     getAlbumImages(this.props.params.albumName).then((result) => {
@@ -14,9 +14,9 @@ class ImageList extends React.Component {
   }
   render() {
     return (
-    <div>
-      <Gallery elements={this.state.images} />
-    </div>);
+      <div className="grid">
+        <Gallery elements={this.state.images} />
+      </div>);
   }
 }
 

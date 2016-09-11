@@ -1,5 +1,6 @@
 import React from 'react';
 import { getAlbumImages } from './AlbumService';
+import  Gallery  from './Gallery'
 
 class ImageList extends React.Component {
   constructor() {
@@ -14,7 +15,7 @@ class ImageList extends React.Component {
   render() {
     return (
     <div>
-      {this.state.images.map(image => <ImageItem imageUrl={image} key={image} />)}
+      <Gallery elements={this.state.images} />
     </div>);
   }
 }

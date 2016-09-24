@@ -12,7 +12,7 @@ var Gallery = React.createClass({
     render: function () {
         var childElements = this.props.elements.map(function (element) {
             return (
-                <div className="grid-item">
+                <div className="grid-item" key={element}>
                     <img src={element} />
                 </div>
             );

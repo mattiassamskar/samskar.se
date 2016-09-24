@@ -15,16 +15,9 @@ class ImageList extends React.Component {
   render() {
     return (
       <div className="grid">
-        <Gallery elements={this.state.images} />
+        <Gallery images={this.state.images} />
       </div>);
   }
-}
-
-const ImageItem = (props) => {
-  return (
-    <div>
-      <img className="image" src={props.imageUrl}></img>
-    </div>);
 }
 
 export default ImageList;

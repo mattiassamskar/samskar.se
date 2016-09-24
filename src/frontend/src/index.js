@@ -68,7 +68,7 @@
 
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRouter.Router,
-	  null,
+	  { history: _reactRouter.hashHistory },
 	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _AlbumList2.default }),
 	  _react2.default.createElement(_reactRouter.Route, { path: 'albums/:albumName', component: _ImageList2.default })
 	), document.getElementById('content'));
@@ -108,7 +108,7 @@
 
 
 	// module
-	exports.push([module.id, "body {\r\n    background-color: #000;\r\n    font-family: 'Press Start 2P', cursive;\r\n}\r\n\r\n.main {\r\n    margin-left: 20%;\r\n}\r\n\r\n.title {\r\n    color: #fff;\r\n    font-size: 42px;\r\n    margin-bottom: 90px;\r\n    margin-top: 50px;\r\n}\r\n\r\n.grid-sizer,\r\n.grid-item {\r\n  width: 33.333%;\r\n}\r\n\r\n.grid-item img {\r\n  display: block;\r\n  max-width: 100%;\r\n}\r\n\r\n.gutter-sizer {\r\n  width: 0%;\r\n}\r\n\r\na:link {\r\n    color: white;\r\n}\r\n\r\na:visited {\r\n    color: grey;\r\n}\r\n\r\na:hover {\r\n    color: darkgrey;\r\n}\r\n\r\na:active {\r\n    color: darkgrey;\r\n}\r\n\r\n@media only screen and (min-device-width:768px)and (max-device-width:1024px) {\r\n    .main{\r\n        margin-left: 2px;\r\n    }\r\n    .title {\r\n        font-size: 40px;\r\n        margin-bottom: 80px;\r\n    }\r\n    .grid-sizer,\r\n    .grid-item { \r\n        width: 50%; \r\n    }\r\n}\r\n\r\n@media only screen and (min-device-width:320px)and (max-device-width:667px) {\r\n    .main{\r\n        margin-left: 2px;\r\n    }\r\n    .title {\r\n        font-size: 20px;\r\n        margin-bottom: 50px;\r\n        margin-top: 30px;\r\n    }\r\n    .grid-sizer,\r\n    .grid-item {\r\n        width: 50%;     \r\n    }\r\n}\r\n", ""]);
+	exports.push([module.id, "body {\r\n    background-color: #000;\r\n    font-family: 'Press Start 2P', cursive;\r\n}\r\n\r\n.main {\r\n    margin-left: 20%;\r\n}\r\n\r\n.title {\r\n    color: #fff;\r\n    font-size: 42px;\r\n    margin-bottom: 90px;\r\n    margin-top: 50px;\r\n}\r\n\r\n.grid-sizer,\r\n.grid-item {\r\n  width: 33.333%;\r\n}\r\n\r\n.grid-item img {\r\n  display: block;\r\n  max-width: 100%;\r\n}\r\n\r\n.gutter-sizer {\r\n  width: 0%;\r\n}\r\n\r\n.albumItem {\r\n    font-size: 18px;\r\n    margin-bottom: 24px;\r\n}\r\n\r\na:link {\r\n    color: white;\r\n}\r\n\r\na:visited {\r\n    color: grey;\r\n}\r\n\r\na:hover {\r\n    color: darkgrey;\r\n}\r\n\r\na:active {\r\n    color: darkgrey;\r\n}\r\n\r\n@media only screen and (min-device-width:768px)and (max-device-width:1024px) {\r\n    .main{\r\n        margin-left: 2px;\r\n    }\r\n    .title {\r\n        font-size: 40px;\r\n        margin-bottom: 80px;\r\n    }\r\n    .grid-sizer,\r\n    .grid-item { \r\n        width: 50%; \r\n    }\r\n    .albumItem {\r\n        font-size: 18px;\r\n        margin-bottom: 30px;\r\n    }\r\n}\r\n\r\n@media only screen and (min-device-width:320px)and (max-device-width:667px) {\r\n    .main{\r\n        margin-left: 2px;\r\n    }\r\n    .title {\r\n        font-size: 20px;\r\n        margin-bottom: 50px;\r\n        margin-top: 30px;\r\n    }\r\n    .grid-sizer,\r\n    .grid-item {\r\n        width: 50%;     \r\n    }\r\n    .albumItem {\r\n        font-size: 12px;\r\n        margin-bottom: 20px;\r\n    }\r\n}\r\n", ""]);
 
 	// exports
 
@@ -28951,21 +28951,13 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'grid' },
-	        _react2.default.createElement(_Gallery2.default, { elements: this.state.images })
+	        _react2.default.createElement(_Gallery2.default, { images: this.state.images })
 	      );
 	    }
 	  }]);
 
 	  return ImageList;
 	}(_react2.default.Component);
-
-	var ImageItem = function ImageItem(props) {
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement('img', { className: 'image', src: props.imageUrl })
-	  );
-	};
 
 	exports.default = ImageList;
 
@@ -28975,39 +28967,69 @@
 
 	'use strict';
 
-	var React = __webpack_require__(5);
-	var Masonry = __webpack_require__(268);
-
-	var masonryOptions = {
-	    itemSelector: '.grid-item',
-	    columnWidth: '.grid-sizer',
-	    gutter: '.gutter-sizer',
-	    percentPosition: true
-	};
-
-	var Gallery = React.createClass({
-	    displayName: 'Gallery',
-
-	    render: function render() {
-	        var childElements = this.props.elements.map(function (element) {
-	            return React.createElement(
-	                'div',
-	                { className: 'grid-item' },
-	                React.createElement('img', { src: element })
-	            );
-	        });
-
-	        return React.createElement(
-	            Masonry,
-	            { options: masonryOptions, updateOnEachImageLoad: true },
-	            React.createElement('div', { className: 'grid-sizer' }),
-	            React.createElement('div', { className: 'gutter-sizer' }),
-	            childElements
-	        );
-	    }
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
 	});
 
-	module.exports = Gallery;
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(5);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactMasonryComponent = __webpack_require__(268);
+
+	var _reactMasonryComponent2 = _interopRequireDefault(_reactMasonryComponent);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Gallery = function (_React$Component) {
+	    _inherits(Gallery, _React$Component);
+
+	    function Gallery() {
+	        _classCallCheck(this, Gallery);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Gallery).call(this));
+
+	        _this.options = {
+	            itemSelector: '.grid-item',
+	            columnWidth: '.grid-sizer',
+	            gutter: '.gutter-sizer',
+	            percentPosition: true
+	        };
+	        return _this;
+	    }
+
+	    _createClass(Gallery, [{
+	        key: 'render',
+	        value: function render() {
+	            var images = this.props.images.map(function (image) {
+	                return _react2.default.createElement(
+	                    'div',
+	                    { className: 'grid-item', key: image },
+	                    _react2.default.createElement('img', { src: image })
+	                );
+	            });
+	            return _react2.default.createElement(
+	                _reactMasonryComponent2.default,
+	                { options: this.options, updateOnEachImageLoad: true },
+	                _react2.default.createElement('div', { className: 'grid-sizer' }),
+	                _react2.default.createElement('div', { className: 'gutter-sizer' }),
+	                images
+	            );
+	        }
+	    }]);
+
+	    return Gallery;
+	}(_react2.default.Component);
+
+	exports.default = Gallery;
 
 /***/ },
 /* 268 */

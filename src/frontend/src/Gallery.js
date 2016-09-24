@@ -1,31 +1,32 @@
-var React = require('react');
-var Masonry = require('react-masonry-component');
+import React from 'react';
+import Masonry from 'react-masonry-component';
 
-var masonryOptions = {
-    itemSelector: '.grid-item',
-    columnWidth: '.grid-sizer',
-    gutter: '.gutter-sizer',
-    percentPosition: true
-};
-
-var Gallery = React.createClass({
-    render: function () {
-        var childElements = this.props.elements.map(function (element) {
+class Gallery extends React.Component {
+    constructor() {
+        super();
+        this.options = {
+            itemSelector: '.grid-item',
+            columnWidth: '.grid-sizer',
+            gutter: '.gutter-sizer',
+            percentPosition: true,
+        };
+    }
+    render() {
+        var images = this.props.images.map((image) => {
             return (
-                <div className="grid-item" key={element}>
-                    <img src={element} />
+                <div className="grid-item" key={image}>
+                    <img src={image} />
                 </div>
             );
         });
-
         return (
-            <Masonry options={masonryOptions} updateOnEachImageLoad={true}>
+            <Masonry options={this.options} updateOnEachImageLoad={true}>
                 <div className="grid-sizer"></div>
                 <div className="gutter-sizer"></div>
-                {childElements}
+                {images}
             </Masonry>
         );
     }
-});
+}
 
-module.exports = Gallery;
+export default Gallery;

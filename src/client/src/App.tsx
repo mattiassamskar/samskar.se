@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { getBlobFolders, getLoginData } from "./api";
+import { getBlobFolders, getLoginData, getFolderFiles } from "./api";
 
 const App: React.FC = () => {
   const [accessToken, setAccessToken] = useState("");
   const [name, setName] = useState("");
   const [folders, setFolders] = useState([""]);
+  const [files, setFiles] = useState([""]);
 
   const login = async () => {
     const loginData = await getLoginData();
@@ -17,6 +18,11 @@ const App: React.FC = () => {
     setFolders(folders);
   };
 
+  const getFiles = async (folder: string) => {
+    const files = await getFolderFiles(accessToken, folder);
+    setFiles(files);
+  };
+
   return (
     <div>
       <div>samskar.se</div>
@@ -25,7 +31,12 @@ const App: React.FC = () => {
       <div>Name: {name}</div>
       <button onClick={getFolders}>Get folders</button>
       {folders.map(folder => (
-        <div key={folder}>{folder}</div>
+        <div key={folder} onClick={() => getFiles(folder)}>
+          {folder}
+        </div>
+      ))}
+      {files.map(file => (
+        <div key={file}>{file}</div>
       ))}
     </div>
   );

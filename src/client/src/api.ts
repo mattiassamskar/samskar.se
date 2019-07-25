@@ -13,6 +13,18 @@ export interface ContainerData {
   }[];
 }
 
+export interface FolderData {
+  EnumerationResults: {
+    Blobs: {
+      Blob: {
+        Name: {
+          _text: string;
+        }[];
+      }[];
+    }[];
+  }[];
+}
+
 export interface LoginData {
   accessToken: string;
   name: string;
@@ -39,6 +51,32 @@ export const getBlobFolders = async (
   return transformContainerData(json);
 };
 
+export const getFolderFiles = async (
+  accessToken: string,
+  folder: string
+): Promise<string[]> => {
+  const url =
+    "https://samskarstorage.blob.core.windows.net/samskar-se?restype=container&comp=list&prefix=" +
+    folder;
+
+  const response = await fetch(url, {
+    headers: {
+      Authorization: "Bearer " + accessToken,
+      "x-ms-version": "2017-11-09"
+    }
+  });
+  if (!response.ok) throw new Error();
+
+  const folderData = xmltojson.parseString(
+    await response.text(),
+    {}
+  ) as FolderData;
+  return transformFolderData(
+    "https://samskarstorage.blob.core.windows.net/samskar-se/",
+    folderData
+  );
+};
+
 export const getLoginData = async (): Promise<LoginData> => {
   const authenticationParameters: AuthenticationParameters = {
     scopes: ["https://storage.azure.com/user_impersonation"]
@@ -63,6 +101,11 @@ export const getLoginData = async (): Promise<LoginData> => {
 const transformContainerData = (containerData: ContainerData): string[] =>
   containerData.EnumerationResults[0].Blobs[0].BlobPrefix.map(blobPrefix =>
     blobPrefix.Name[0]._text.replace("/", "")
+  );
+
+const transformFolderData = (url: string, folderData: FolderData): string[] =>
+  folderData.EnumerationResults[0].Blobs.map(
+    blob => url + blob.Blob[0].Name[0]._text
   );
 
 const userAgentApplication = new UserAgentApplication({

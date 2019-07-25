@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { UserAgentApplication, AuthenticationParameters } from "msal";
+import xmltojson from "xmltojson";
 
 const userAgentApplication = new UserAgentApplication({
   auth: {
@@ -17,7 +18,7 @@ const userAgentApplication = new UserAgentApplication({
 const App: React.FC = () => {
   const [accessToken, setAccessToken] = useState("");
   const [name, setName] = useState("");
-  const [folders, setFolders] = useState([]);
+  const [folders, setFolders] = useState([""]);
 
   const getAccessToken = async () => {
     const authenticationParameters: AuthenticationParameters = {
@@ -43,14 +44,36 @@ const App: React.FC = () => {
     const url =
       "https://samskarstorage.blob.core.windows.net/samskar-se?restype=container&comp=list&delimiter=/";
 
-    const folders = await fetch(url, {
+    const response = await fetch(url, {
       headers: {
         Authorization: "Bearer " + accessToken,
         "x-ms-version": "2017-11-09"
       }
     });
-    console.log(folders);
+    if (!response.ok) return;
+    const json = xmltojson.parseString(
+      await response.text(),
+      {}
+    ) as ContainerData;
+    setFolders(transformContainerData(json));
   };
+
+  const transformContainerData = (containerData: ContainerData): string[] =>
+    containerData.EnumerationResults[0].Blobs[0].BlobPrefix.map(blobPrefix =>
+      blobPrefix.Name[0]._text.replace("/", "")
+    );
+
+  interface ContainerData {
+    EnumerationResults: {
+      Blobs: {
+        BlobPrefix: {
+          Name: {
+            _text: string;
+          }[];
+        }[];
+      }[];
+    }[];
+  }
 
   return (
     <div>

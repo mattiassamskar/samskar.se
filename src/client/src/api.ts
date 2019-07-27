@@ -104,8 +104,8 @@ const transformContainerData = (containerData: ContainerData): string[] =>
   );
 
 const transformFolderData = (url: string, folderData: FolderData): string[] =>
-  folderData.EnumerationResults[0].Blobs.map(
-    blob => url + blob.Blob[0].Name[0]._text
+  folderData.EnumerationResults[0].Blobs[0].Blob.map(
+    blob => url + blob.Name[0]._text
   );
 
 const userAgentApplication = new UserAgentApplication({

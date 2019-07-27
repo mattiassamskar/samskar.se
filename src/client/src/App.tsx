@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { getBlobFolders, getLoginData, getFolderFiles } from "./api";
+import { BrowserRouter, Route } from "react-router-dom";
+import { getLoginData } from "./api";
+import { Home } from "./Home";
+import { Album } from "./Album";
 
 const App: React.FC = () => {
   const [accessToken, setAccessToken] = useState("");
@@ -15,10 +18,27 @@ const App: React.FC = () => {
     setName(loginData.name);
   };
 
+  if (accessToken === "") return <div />;
+
   return (
-    <div>
+    <BrowserRouter>
       <div>samskar.se - {name}</div>
-    </div>
+      <Route
+        path="/"
+        exact
+        render={props => <Home {...props} accessToken={accessToken} />}
+      />
+      <Route
+        path="/album/:albumId"
+        render={props => (
+          <Album
+            {...props}
+            accessToken={accessToken}
+            folder={props.match.params.albumId}
+          />
+        )}
+      />
+    </BrowserRouter>
   );
 };
 

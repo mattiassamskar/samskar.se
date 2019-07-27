@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getBlobFolders } from "./api";
+import { Link } from "react-router-dom";
 
 interface Props {
   accessToken: string;
@@ -10,12 +11,12 @@ export const Home: React.FC<Props> = props => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    getFiles();
-  }, []);
+    getFolders(props.accessToken);
+  }, [props.accessToken]);
 
-  const getFiles = async () => {
+  const getFolders = async (accessToken: string) => {
     setIsLoading(true);
-    const folders = await getBlobFolders(props.accessToken);
+    const folders = await getBlobFolders(accessToken);
     setFolders(folders);
     setIsLoading(false);
   };
@@ -23,7 +24,9 @@ export const Home: React.FC<Props> = props => {
   return (
     <div>
       {folders.map(folder => (
-        <div key={folder}>{folder}</div>
+        <div key={folder}>
+          <Link to={`/album/${folder}`}>{folder}</Link>
+        </div>
       ))}
     </div>
   );

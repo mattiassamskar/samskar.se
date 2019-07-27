@@ -11,12 +11,12 @@ export const Album: React.FC<Props> = props => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    getFiles();
-  }, []);
+    getFiles(props.accessToken, props.folder);
+  }, [props.accessToken, props.folder]);
 
-  const getFiles = async () => {
+  const getFiles = async (accessToken: string, folder: string) => {
     setIsLoading(true);
-    const files = await getFolderFiles(props.accessToken, props.folder);
+    const files = await getFolderFiles(accessToken, folder);
     setFiles(files);
     setIsLoading(false);
   };

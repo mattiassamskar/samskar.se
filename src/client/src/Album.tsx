@@ -21,6 +21,8 @@ export const Album: React.FC<Props> = props => {
     setIsLoading(false);
   };
 
+  if (isLoading) return <div>Loading..</div>;
+
   return (
     <div
       style={{

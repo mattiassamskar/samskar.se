@@ -38,5 +38,5 @@ export const AuthImage: React.FC<Props> = props => {
     setData(base64Flag + imageStr);
   };
 
-  return <img src={data} style={props.style} />;
+  return <img src={data} style={props.style} alt="" />;
 };

@@ -22,9 +22,18 @@ export const Album: React.FC<Props> = props => {
   };
 
   return (
-    <div>
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
       {files.map(file => (
-        <AuthImage key={file} accessToken={props.accessToken} url={file} />
+        <div>
+          <AuthImage
+            key={file}
+            accessToken={props.accessToken}
+            url={file}
+            style={{ width: "100vw" }}
+          />
+        </div>
       ))}
     </div>
   );

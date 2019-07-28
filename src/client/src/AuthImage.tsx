@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 interface Props {
   accessToken: string;
   url: string;
+  style?: any;
 }
 
 const arrayBufferToBase64 = (buffer: any) => {
@@ -37,5 +38,5 @@ export const AuthImage: React.FC<Props> = props => {
     setData(base64Flag + imageStr);
   };
 
-  return <img src={data} />;
+  return <img src={data} style={props.style} />;
 };

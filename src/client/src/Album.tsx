@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getFolderFiles } from "./api";
-
+import { AuthImage } from "./AuthImage";
 interface Props {
   accessToken: string;
   folder: string;
@@ -24,7 +24,7 @@ export const Album: React.FC<Props> = props => {
   return (
     <div>
       {files.map(file => (
-        <div key={file}>{file}</div>
+        <AuthImage key={file} accessToken={props.accessToken} url={file} />
       ))}
     </div>
   );

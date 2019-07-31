@@ -10,7 +10,6 @@
     "@types/react-dom": "16.8.4",
     "@types/react-router-dom": "^4.3.4",
     "@types/xmltojson": "^0.0.28",
-    "azure-storage": "^2.10.3",
     "msal": "^1.0.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

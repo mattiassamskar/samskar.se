@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getFolderFiles } from "./api";
+import { getFolderFiles, uploadFiles } from "./api";
 import { AuthImage } from "./AuthImage";
 interface Props {
   accessToken: string;
@@ -21,10 +21,20 @@ export const Album: React.FC<Props> = props => {
     setIsLoading(false);
   };
 
+  const onDrop = async (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    await uploadFiles(e.dataTransfer.files, props.folder, props.accessToken);
+    setIsLoading(false);
+  };
+
   if (isLoading) return <div>Loading..</div>;
 
   return (
     <div
+      onDragOver={e => e.preventDefault()}
+      onDragEnd={e => e.dataTransfer.clearData()}
+      onDrop={onDrop}
       style={{
         display: "flex",
         flexDirection: "column",

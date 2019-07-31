@@ -98,6 +98,37 @@ export const getLoginData = async (): Promise<LoginData> => {
   }
 };
 
+export const uploadFiles = async (
+  fileList: FileList,
+  folder: string,
+  accessToken: string
+) => {
+  try {
+    const url =
+      "https://samskarstorage.blob.core.windows.net/samskar-se/" + folder + "/";
+
+    for (var i = 0; i < fileList.length; i++) {
+      const file = fileList[i];
+      const fileReader = new FileReader();
+      fileReader.onload = async () => {
+        await fetch(url + file.name, {
+          method: "PUT",
+          headers: {
+            Authorization: "Bearer " + accessToken,
+            "Content-Length": file.size.toString(),
+            "x-ms-version": "2017-11-09",
+            "x-ms-blob-type": "BlockBlob"
+          },
+          body: fileReader.result
+        });
+      };
+      fileReader.readAsArrayBuffer(file);
+    }
+  } catch (error) {
+    throw new Error("Error uploading files: " + error.message);
+  }
+};
+
 const transformContainerData = (containerData: ContainerData): string[] =>
   containerData.EnumerationResults[0].Blobs[0].BlobPrefix.map(blobPrefix =>
     blobPrefix.Name[0]._text.replace("/", "")
